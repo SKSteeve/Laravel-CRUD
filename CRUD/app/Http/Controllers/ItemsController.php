@@ -6,16 +6,33 @@ use Illuminate\Http\Request;
 class ItemsController extends Controller
 {
     
-    public function Item($id = 0)
+    public function Item(Request $request, $id = 0)
     {
-        echo "u are in Item $id";
+        $student = $request->input('formdata');
 
-        return view('item');
+        $variables = [
+
+            'student' => $student,
+
+            'subject' => [0 => 'Биоинженерство (по подразбиране)', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология'],
+            'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
+        ];
+
+        return view('item', $variables);
     }
 
-    public function Items($id = 0)
+    public function Items(Request $request, $id = 0)
     {
-        echo "u are in Itemsss $id";
-        return view('items');
+        $student = $request->input('formdata');
+
+        $variables = [
+
+            'student' => $student,
+
+            'subject' => [0 => 'Биоинженерство (по подразбиране)', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология'],
+            'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
+        ];
+
+        return view('items', $variables);
     }
 }
