@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::any('items/{id?}', 'ItemsController@Items');
+Route::any('item/{id?}', 'ItemsController@Item');
