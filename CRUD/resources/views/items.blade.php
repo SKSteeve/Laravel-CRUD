@@ -87,8 +87,36 @@
 
   </form>
 </div>
+<br /><br />
+<br /><br />
 @endsection
 
 @section('table')
-    tablica
+<div class="mx-auto" style="width: 1200px;">
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Име</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">ЕГН</th>
+        <th scope="col">Имейл</th>
+        <th scope="col">Град</th>
+        <th scope="col">Пол</th>
+        <th scope="col">Пр.спорт</th>
+        <th scope="col">Изб.предмет</th>
+        <th scope="col">Описание</th>
+
+        <th scope="col">Редактиране</th>
+        <th scope="col">Изтриване</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{-- @foreach()
+        TODO print the rows of array from getRecords()
+      @endforeach --}}
+    </tbody>
+  </table>
+</div>
 @endsection
