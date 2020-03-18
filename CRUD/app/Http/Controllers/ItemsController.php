@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ItemsServices;
 
 class ItemsController extends Controller
 {
@@ -24,6 +26,7 @@ class ItemsController extends Controller
     public function Items(Request $request, $id = 0)
     {
         $student = $request->input('formdata');
+
 
         $variables = [
 
