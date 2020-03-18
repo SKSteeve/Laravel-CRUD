@@ -17,14 +17,14 @@
       </div>
       <div class="form-group col-md-4">
         <label for="lastName">Фамилия</label>
-        <input type="text" class="form-control" id="lastName" name="formdata[lastName]"  value="{{@$student['lastName']}}">
+        <input type="text" class="form-control" id="lastName" name="formdata[last_name]"  value="{{@$student['last_name']}}">
       </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-4">
           <label for="EGN">ЕГН</label>
-          <input type="number" class="form-control" id="EGN" name="formdata[EGN]"  value="{{@$student['EGN']}}">
+          <input type="number" class="form-control" id="EGN" name="formdata[egn]"  value="{{@$student['egn']}}">
         </div>
         <div class="form-group col-md-4">
           <label for="email">Имейл</label>
@@ -46,11 +46,11 @@
         </div>
         <div class="form-group col-md-4">
           <p>Предпочитани спортове:</p>
-          <input type="checkbox" id="football" name="formdata[sportPref][football]" @if(isset($student['sportPref']['football'])) checked @endif value="football">
+          <input type="checkbox" id="football" name="formdata[sport_preff][football]" @if(isset($student['sport_preff']['football'])) checked @endif value="football">
           <label for="football">Футбол</label><br />
-          <input type="checkbox" id="voleyball" name="formdata[sportPref][voleyball]" @if(isset($student['sportPref']['voleyball'])) checked @endif value="voleyball">
+          <input type="checkbox" id="voleyball" name="formdata[sport_preff][voleyball]" @if(isset($student['sport_preff']['voleyball'])) checked @endif value="voleyball">
           <label for="voleyball">Волейбол</label><br />
-          <input type="checkbox" id="swiming" name="formdata[sportPref][swiming]" @if(isset($student['sportPref']['swiming'])) checked @endif value="swiming">
+          <input type="checkbox" id="swiming" name="formdata[sport_preff][swiming]" @if(isset($student['sport_preff']['swiming'])) checked @endif value="swiming">
           <label for="swiming">Плуване</label>
         </div>
         <div class="form-group col-md-4">
@@ -66,7 +66,7 @@
       <div class="form-row">
         <div class="form-group col-md-12">
             <label for="short-description">Кратко описание</label><br />
-            <textarea id="short-description" class="form-control" rows="3" placeholder="Опиши се (по желание)" name="formdata[descriptionText]">{{@$student['descriptionText']}}</textarea><br />
+            <textarea id="short-description" class="form-control" rows="3" placeholder="Опиши се (по желание)" name="formdata[description_text]">{{@$student['description_text']}}</textarea><br />
         </div>
       </div>
       

@@ -17,14 +17,14 @@
       </div>
       <div class="form-group col-md-4">
         <label for="lastName">Фамилия</label>
-        <input type="text" class="form-control" id="lastName" name="formdata[lastName]"  value="{{@$student['lastName']}}">
+        <input type="text" class="form-control" id="lastName" name="formdata[last_name]"  value="{{@$student['last_name']}}">
       </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-4">
           <label for="EGN">ЕГН</label>
-          <input type="number" class="form-control" id="EGN" name="formdata[EGN]"  value="{{@$student['EGN']}}">
+          <input type="number" class="form-control" id="EGN" name="formdata[egn]"  value="{{@$student['egn']}}">
         </div>
         <div class="form-group col-md-4">
           <label for="email">Имейл</label>
@@ -46,11 +46,11 @@
         </div>
         <div class="form-group col-md-4">
           <p>Предпочитани спортове:</p>
-          <input type="checkbox" id="football" name="formdata[sportPref][football]" @if(isset($student['sportPref']['football'])) checked @endif value="football">
+          <input type="checkbox" id="football" name="formdata[sport_preff][football]" @if(isset($student['sport_preff']['football'])) checked @endif value="football">
           <label for="football">Футбол</label><br />
-          <input type="checkbox" id="voleyball" name="formdata[sportPref][voleyball]" @if(isset($student['sportPref']['voleyball'])) checked @endif value="voleyball">
+          <input type="checkbox" id="voleyball" name="formdata[sport_preff][voleyball]" @if(isset($student['sport_preff']['voleyball'])) checked @endif value="voleyball">
           <label for="voleyball">Волейбол</label><br />
-          <input type="checkbox" id="swiming" name="formdata[sportPref][swiming]" @if(isset($student['sportPref']['swiming'])) checked @endif value="swiming">
+          <input type="checkbox" id="swiming" name="formdata[sport_preff][swiming]" @if(isset($student['sport_preff']['swiming'])) checked @endif value="swiming">
           <label for="swiming">Плуване</label>
         </div>
         <div class="form-group col-md-4">
@@ -66,7 +66,7 @@
       <div class="form-row">
         <div class="form-group col-md-12">
             <label for="short-description">Кратко описание</label><br />
-        <textarea id="short-description" class="form-control" rows="3" placeholder="Опиши се (по желание)" name="formdata[descriptionText]">{{@$student['descriptionText']}}</textarea><br />
+        <textarea id="short-description" class="form-control" rows="3" placeholder="Опиши се (по желание)" name="formdata[description_text]">{{@$student['description_text']}}</textarea><br />
         </div>
       </div>
       
@@ -92,30 +92,45 @@
 @endsection
 
 @section('table')
-<div class="mx-auto" style="width: 1200px;">
-  <table class="table table-hover table-bordered">
+<div class="mx-auto" style="width: 1300px;">
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">ID</th>
-        <th scope="col">Име</th>
-        <th scope="col">Фамилия</th>
-        <th scope="col">ЕГН</th>
-        <th scope="col">Имейл</th>
-        <th scope="col">Град</th>
-        <th scope="col">Пол</th>
-        <th scope="col">Пр.спорт</th>
-        <th scope="col">Изб.предмет</th>
-        <th scope="col">Описание</th>
+        <th>#</th>
+        <th class="text-danger">ID</th>
+        <th>Име</th>
+        <th>Фамилия</th>
+        <th>ЕГН</th>
+        <th>Имейл</th>
+        <th>Град</th>
+        <th>Пол</th>
+        <th>Пр.спорт</th>
+        <th>Изб.предмет</th>
+        <th>Описание</th>
 
-        <th scope="col">Редактиране</th>
-        <th scope="col">Изтриване</th>
+        <th>Редактиране</th>
+        <th>Изтриване</th>
       </tr>
     </thead>
     <tbody>
-      {{-- @foreach()
-        TODO print the rows of array from getRecords()
-      @endforeach --}}
+      @foreach($students as $student)
+        <tr>
+          <th>{{$loop->index+1}}</th>
+          <th class="text-danger">{{$student['id']}}</th>
+          <th>{{$student['name']}}</th>
+          <th>{{$student['last_name']}}</th>
+          <th>{{$student['egn']}}</th>
+          <th>{{$student['email']}}</th>
+          <th>{{$student['city']}}</th>
+          <th>{{$student['gender']}}</th>
+          <th>{{$student['sport_preff']}}</th>
+          <th>{{$student['subject']}}</th>
+          <th>{{$student['description_text']}}</th>
+
+          <th><a href="{{url('item', $student['id'])}}" class="btn btn-primary">Редактирай</a></th>
+          <th><a href="{{url('items', $student['id'])}}" class="btn btn-danger">@if(isset($student['deleted_at'])) <i class="fas fa-trash-alt"></i> @else Изтрий @endif</a></th>
+        </tr>
+      @endforeach
     </tbody>
   </table>
 </div>
