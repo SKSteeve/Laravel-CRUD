@@ -7,8 +7,4 @@ class StudentsModel extends Model
 {
     protected $table = 'students';
     use SoftDeletes;
-    public function printSmt()
-    {
-        echo "da";
-    }
 }
