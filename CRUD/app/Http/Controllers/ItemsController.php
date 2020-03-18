@@ -23,14 +23,19 @@ class ItemsController extends Controller
         return view('item', $variables);
     }
 
+/********************************************************************************************************** */
+
     public function Items(Request $request, $id = 0)
     {
-        $student = $request->input('formdata');
+        $params = $request->input('formdata');
 
+        $ItemsServices = new ItemsServices;
+        $students = $ItemsServices->getRecords($params);
 
         $variables = [
 
-            'student' => $student,
+            'student' => $params,
+            'students' => $students,
 
             'subject' => [0 => 'Биоинженерство (по подразбиране)', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология'],
             'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
