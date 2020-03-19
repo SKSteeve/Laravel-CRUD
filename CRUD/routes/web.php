@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 Route::any('items/{id?}', 'ItemsController@Items');
 Route::any('item/{id?}', 'ItemsController@Item');
+
+// TODO Route::any('delete/{id}', 'ItemsController@delete');
+
