@@ -133,7 +133,7 @@
           <th>{{$student['description_text']}}</th>
 
           <th><a href="{{url('item', $student['id'])}}" class="btn btn-primary">Редактирай</a></th>
-          <th><a href="{{url('items', $student['id'])}}" class="btn btn-danger">@if(isset($student['deleted_at'])) <i class="fas fa-trash-alt"></i> @else Изтрий @endif</a></th>
+          <th><a href="{{url('delete', $student['id'])}}" class="btn btn-danger">@if(isset($student['deleted_at'])) <i class="fas fa-trash-alt"></i> @else Изтрий @endif</a></th>
         </tr>
       @endforeach
     </tbody>
