@@ -19,12 +19,11 @@ class StudentsTableSeeder extends Seeder
             'email' => 'ivanov@gmail.com',
             'city' => 'Варна',
             'gender' => 'Мъж',
-            'sport_preff' => '-',
-            'subject' => 1,
+            'sport_preff' => 'football,voleyball',
+            'subject' => 3,
             'description_text' => 'Плача докат уча',
             'created_at' => now(),
             'updated_at' => now(),
-            'deleted_at' => now(),
         ]);
 
         DB::table('students')->insert([
@@ -35,7 +34,7 @@ class StudentsTableSeeder extends Seeder
             'email' => 'stefan@gmail.com',
             'city' => 'София',
             'gender' => 'Мъж',
-            'sport_preff' => '-',
+            'sport_preff' => NULL,
             'subject' => 2,
             'description_text' => 'Плача док',
             'created_at' => now(),
@@ -50,7 +49,7 @@ class StudentsTableSeeder extends Seeder
             'email' => 'mstefv@gmail.com',
             'city' => 'Казанлък',
             'gender' => 'Жена',
-            'sport_preff' => '-',
+            'sport_preff' => 'swiming',
             'subject' => 1,
             'description_text' => 'Плача докат уча',
             'created_at' => now(),
@@ -65,8 +64,8 @@ class StudentsTableSeeder extends Seeder
             'email' => 'sula@gmail.com',
             'city' => 'Пазарджик',
             'gender' => 'Мъж',
-            'sport_preff' => '-',
-            'subject' => 2,
+            'sport_preff' => 'football',
+            'subject' => NULL,
             'description_text' => 'Пл уча',
             'created_at' => now(),
             'updated_at' => now(),
@@ -80,12 +79,11 @@ class StudentsTableSeeder extends Seeder
             'email' => 'ilian@gmail.com',
             'city' => 'Бургас',
             'gender' => 'Мъж',
-            'sport_preff' => '-',
-            'subject' => 3,
+            'sport_preff' => 'voleyball',
+            'subject' => 4,
             'description_text' => 'докат уча',
             'created_at' => now(),
             'updated_at' => now(),
-            'deleted_at' => now(),
         ]);
     }
 }
