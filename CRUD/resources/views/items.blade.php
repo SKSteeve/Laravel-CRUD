@@ -124,7 +124,7 @@
           <th>{{$student['city']}}</th>
           <th>{{$student['gender']}}</th>
           <th>{{$student['sport_preff']}}</th>
-          <th>{{$student['subject']}}</th>
+          <th>@if($student['subject'] == 1) {{$subject[1]}} @elseif($student['subject'] == 2) {{$subject[2]}} @elseif($student['subject'] == 3) {{$subject[3]}} @elseif($student['subject'] == 4) {{$subject[4]}}@endif</th>
           <th>{{$student['description_text']}}</th>
 
           <th><a href="{{url('item', $student['id'])}}" class="btn btn-primary">Редактирай</a></th>
