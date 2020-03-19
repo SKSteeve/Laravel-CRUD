@@ -30,6 +30,15 @@ class ItemsController extends Controller
         $params = $request->input('formdata');
 
         $ItemsServices = new ItemsServices;
+
+        if($id > 0) {
+            $delete = $ItemsServices->delete($id);
+            
+            $message = "Успешно изтрит студент с ID - $id";
+            $messageStatus = "success";
+            return redirect('items')->with(['message' => $message, 'messageStatus' => $messageStatus]);
+        }
+
         $students = $ItemsServices->getRecords($params);
 
         $variables = [
@@ -37,7 +46,7 @@ class ItemsController extends Controller
             'student' => $params,
             'students' => $students,
 
-            'subject' => [0 => 'Биоинженерство (по подразбиране)', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология'],
+            'subject' => [0 => '-', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология', 4 => 'Биоинженерство'],
             'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
         ];
 
