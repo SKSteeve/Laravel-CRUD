@@ -93,6 +93,11 @@
 
 @section('table')
 <div class="mx-auto" style="width: 1300px;">
+
+  @if(session('message'))
+    <div class="alert alert-{{session()->get('messageStatus')}}" role="alert">{{session()->get('message')}}</div><br />
+  @endif
+
   <table class="table table-hover">
     <thead>
       <tr>
