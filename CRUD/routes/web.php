@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('items/{id?}', 'ItemsController@Items');
+Route::any('items', 'ItemsController@Items');
 Route::any('item/{id?}', 'ItemsController@Item');
 
-// TODO Route::any('delete/{id}', 'ItemsController@delete');
+Route::any('delete/{id}', 'ItemsController@delete');
 
