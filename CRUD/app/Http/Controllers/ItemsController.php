@@ -31,14 +31,6 @@ class ItemsController extends Controller
 
         $ItemsServices = new ItemsServices;
 
-        if($id > 0) {
-            $delete = $ItemsServices->delete($id);
-            
-            $message = "Успешно изтрит студент с ID - $id";
-            $messageStatus = "success";
-            return redirect('items')->with(['message' => $message, 'messageStatus' => $messageStatus]);
-        }
-
         $students = $ItemsServices->getRecords($params);
 
         $variables = [
@@ -51,5 +43,22 @@ class ItemsController extends Controller
         ];
 
         return view('items', $variables);
+    }
+
+    /***************************************************************************************************** */
+
+    function delete($id)
+    {
+        $ItemsServices = new ItemsServices;
+
+        if($id > 0) {
+            $delete = $ItemsServices->delete($id);
+            
+            $message = "Успешно изтрит студент с ID - $id";
+            $messageStatus = "success";
+            return redirect('items')->with(['message' => $message, 'messageStatus' => $messageStatus]);
+        }
+
+        return abort(404);
     }
 }
