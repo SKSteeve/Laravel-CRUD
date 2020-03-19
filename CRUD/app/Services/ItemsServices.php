@@ -25,7 +25,12 @@ class ItemsServices
 
     private function setValues($fields)
     {
+        //if subject isset && subject > 0 -> fields['subj'] = subj
 
+        // TODO ->
+        // $arrDB = implode(',', $searchParams['sport_preff']);
+        //echo $arrDB;
+        //var_dump($searchParams['sport_preff']);
         return $fields;
     }
 
@@ -75,7 +80,25 @@ class ItemsServices
                 $StudentsModel = $StudentsModel->where('gender', $searchParams['gender']);
             }
 
-            //TODO sport_preff , subject & description text
+            if(isset($searchParams['sport_preff'])) {
+                if(isset($searchParams['sport_preff']['football'])) {
+                    $StudentsModel = $StudentsModel->where('sport_preff', 'LIKE', '%' . $searchParams['sport_preff']['football'] . '%');
+                }
+                if(isset($searchParams['sport_preff']['voleyball'])) {
+                    $StudentsModel = $StudentsModel->where('sport_preff', 'LIKE', '%' . $searchParams['sport_preff']['voleyball'] . '%');
+                }
+                if(isset($searchParams['sport_preff']['swiming'])) {
+                    $StudentsModel = $StudentsModel->where('sport_preff', 'LIKE', '%' . $searchParams['sport_preff']['swiming'] . '%');
+                }
+            }
+
+            if(isset($searchParams['subject']) && $searchParams['subject'] > 0) {
+                $StudentsModel = $StudentsModel->where('subject', $searchParams['subject']);
+            }
+            
+            if(isset($searchParams['description_text'])) {
+                $StudentsModel = $StudentsModel->where('description_text', 'LIKE', '%' . $searchParams['description_text'] . '%');
+            }
         }
 
         if(isset($searchParams['searchGroup']) && $searchParams['searchGroup'] == 2) {  //show trashed
@@ -94,8 +117,11 @@ class ItemsServices
 
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $StudentsModel = new StudentsModel;
 
+        $forceDelete = $StudentsModel->where('id', $id)->whereNotNull('deleted_at')->forceDelete();
+        $softDelete = $StudentsModel->where('id', $id)->whereNull('deleted_at')->delete();
     }
 }
