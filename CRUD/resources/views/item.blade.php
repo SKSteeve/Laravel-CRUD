@@ -46,11 +46,11 @@
         </div>
         <div class="form-group col-md-4">
           <p>Предпочитани спортове:</p>
-          <input type="checkbox" id="football" name="formdata[sport_preff][football]" @if(isset($student['sport_preff']['football'])) checked @endif value="football">
+          <input type="checkbox" id="football" name="formdata[sport_preff][football]" @if(isset($student['sport_preff']['football']) || strpos($student['sport_preff'], 'football') !== false) checked @endif value="football">
           <label for="football">Футбол</label><br />
-          <input type="checkbox" id="voleyball" name="formdata[sport_preff][voleyball]" @if(isset($student['sport_preff']['voleyball'])) checked @endif value="voleyball">
+          <input type="checkbox" id="voleyball" name="formdata[sport_preff][voleyball]" @if(isset($student['sport_preff']['voleyball']) || strpos($student['sport_preff'], 'voleyball') !== false) checked @endif value="voleyball">
           <label for="voleyball">Волейбол</label><br />
-          <input type="checkbox" id="swiming" name="formdata[sport_preff][swiming]" @if(isset($student['sport_preff']['swiming'])) checked @endif value="swiming">
+          <input type="checkbox" id="swiming" name="formdata[sport_preff][swiming]" @if(isset($student['sport_preff']['swiming']) || strpos($student['sport_preff'], 'swiming') !== false) checked @endif value="swiming">
           <label for="swiming">Плуване</label>
         </div>
         <div class="form-group col-md-4">
