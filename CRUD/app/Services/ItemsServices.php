@@ -112,9 +112,13 @@ class ItemsServices
         return $StudentsModel->get();
     }
 
-    public function getDetails()
+    public function getDetails($id)
     {
+        $StudentsModel = new StudentsModel;
 
+        $student = $StudentsModel::find($id);
+
+        return $student;
     }
 
     public function delete($id)
