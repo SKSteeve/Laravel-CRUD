@@ -10,13 +10,37 @@ class ItemsController extends Controller
     
     public function Item(Request $request, $id = 0)
     {
-        $student = $request->input('formdata');
+        $studentData = $request->input('formdata');
+
+        $ItemsServices = new ItemsServices($studentData);
+
+        if($id > 0) {                       // edit student
+            $studentData = $ItemsServices->getDetails($id);
+        }
+
+        $save = $request->input('save');
+        $message = '';
+        $errors = [];
+        if(isset($save)) {
+            $save = $ItemsServices->save();
+
+            if($save['status'] > 0) {
+                $message = $save['message'];
+                $studentData = $request->input('formdata');
+                $studentData['id'] = $save['id'];
+            } else {
+                $errors = $save['errors'];
+            }
+        }
 
         $variables = [
 
-            'student' => $student,
+            'student' => $studentData,
 
-            'subject' => [0 => 'Биоинженерство (по подразбиране)', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология'],
+            'message' => $message,
+            'errors' => $errors,
+
+            'subject' => [0 => '-', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология', 4 => 'Биоинженерство'],
             'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
         ];
 
