@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\StudentsModel;
+use Illuminate\Support\Facades\Validator;
 
 class ItemsServices
 {
@@ -21,37 +22,58 @@ class ItemsServices
     public function save()
     {
         $fields = $this->setValues($this->vars);
-        
+        $validateResponse = $this->validate($fields);
+
+        if($validateResponse['status'] > 0) {
+            $storeResponse = $this->store($fields);
+            return $storeResponse;
+        }
+
+        return $validateResponse;
     }
 
     private function setValues($vars = [])
     {
-        if(isset($vars['id'])) {
+        if(isset($vars['id']) && $vars['id'] > 0) {
             $fields['id'] = $vars['id'];
+        } else {
+            $fields['id'] = -1;
         }
 
         if(isset($vars['name'])) {
             $fields['name'] = $vars['name'];
+        } else {
+            $fields['name'] = '';
         }
 
         if(isset($vars['last_name'])) {
             $fields['last_name'] = $vars['last_name'];
+        } else {
+            $fields['last_name'] = '';
         }
 
         if(isset($vars['egn'])) {
             $fields['egn'] = $vars['egn'];
+        } else {
+            $fields['egn'] = '';
         }
 
         if(isset($vars['email'])) {
             $fields['email'] = $vars['email'];
+        } else {
+            $fields['email'] = '';
         }
 
         if(isset($vars['city'])) {
             $fields['city'] = $vars['city'];
+        } else {
+            $fields['city'] = '';
         }
 
         if(isset($vars['gender'])) {
             $fields['gender'] = $vars['gender'];
+        } else {
+            $fields['gender'] = '';
         }
         
         if(isset($vars['sport_preff'])) {
@@ -61,14 +83,20 @@ class ItemsServices
             } else {
                 $fields['sport_preff'] = $vars['sport_preff'];
             }
+        } else {
+            $fields['sport_preff'] = '';
         }
 
         if(isset($vars['subject']) && $vars['subject'] > 0) {
             $fields['subject'] = $vars['subject'];
+        } else {
+            $fields['subject'] = '';
         }
 
         if(isset($vars['description_text'])) {
             $fields['description_text'] = $vars['description_text'];
+        } else {
+            $fields['description_text'] = '';
         }
         
         return $fields;
@@ -76,9 +104,25 @@ class ItemsServices
 
     private function validate($fields)
     {
+        $StudentsModel = new StudentsModel;
+
+        if($fields['id'] > 0) {         // edit student, need to ignore his id for unique columns
+            $validator = Validator::make($fields, $StudentsModel::rules($fields['id']), $StudentsModel::$messages);
+        } else {
+            $validator = Validator::make($fields, $StudentsModel::rules(), $StudentsModel::$messages);
+        }
+
+        if($validator->fails()) {
+            $status = -1;
+            $errors = $validator->errors();
+        } else {
+            $status = 1;
+            $errors = [];
+        }
 
         return $response = [
-
+            'status' => $status,
+            'errors' => $errors,
         ];
     }
 
