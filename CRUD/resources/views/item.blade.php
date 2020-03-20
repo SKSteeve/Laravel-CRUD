@@ -9,7 +9,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="ID">ID</label>
-        <input type="number" class="form-control" id="ID" name="formdata[id]" value="{{@$student['id']}}">
+        <input type="number" class="form-control" id="ID" name="formdata[id]" readonly value="{{@$student['id']}}">
       </div>
       <div class="form-group col-md-4">
         <label for="name">Име</label>
@@ -46,11 +46,11 @@
         </div>
         <div class="form-group col-md-4">
           <p>Предпочитани спортове:</p>
-          <input type="checkbox" id="football" name="formdata[sport_preff][football]" @if(isset($student['sport_preff']['football']) || strpos($student['sport_preff'], 'football') !== false) checked @endif value="football">
+          <input type="checkbox" id="football" name="formdata[sport_preff][football]" @if(isset($student['sport_preff']['football']) || isset($student['sport_preff']) && !is_array($student['sport_preff']) && strpos($student['sport_preff'], 'football') !== false) checked @endif value="football">
           <label for="football">Футбол</label><br />
-          <input type="checkbox" id="voleyball" name="formdata[sport_preff][voleyball]" @if(isset($student['sport_preff']['voleyball']) || strpos($student['sport_preff'], 'voleyball') !== false) checked @endif value="voleyball">
+          <input type="checkbox" id="voleyball" name="formdata[sport_preff][voleyball]" @if(isset($student['sport_preff']['voleyball']) || isset($student['sport_preff']) && !is_array($student['sport_preff']) && strpos($student['sport_preff'], 'voleyball') !== false) checked @endif value="voleyball">
           <label for="voleyball">Волейбол</label><br />
-          <input type="checkbox" id="swiming" name="formdata[sport_preff][swiming]" @if(isset($student['sport_preff']['swiming']) || strpos($student['sport_preff'], 'swiming') !== false) checked @endif value="swiming">
+          <input type="checkbox" id="swiming" name="formdata[sport_preff][swiming]" @if(isset($student['sport_preff']['swiming']) || isset($student['sport_preff']) && !is_array($student['sport_preff']) && strpos($student['sport_preff'], 'swiming') !== false) checked @endif value="swiming">
           <label for="swiming">Плуване</label>
         </div>
         <div class="form-group col-md-4">
@@ -79,5 +79,11 @@
     </div>
 
   </form>
+
+  @if($message != '')
+    <div class="alert alert-success" role="alert">{{$message}}</div>
+  @elseif(!empty($errors))
+    <div class="alert alert-danger" role="alert">Невалидни данни! @foreach(@$errors->all() as $error) {{$error}} @endforeach</div>
+  @endif
 </div>
 @endsection
