@@ -84,19 +84,19 @@ class ItemsServices
                 $fields['sport_preff'] = $vars['sport_preff'];
             }
         } else {
-            $fields['sport_preff'] = '';
+            $fields['sport_preff'] = null;
         }
 
         if(isset($vars['subject']) && $vars['subject'] > 0) {
             $fields['subject'] = $vars['subject'];
         } else {
-            $fields['subject'] = '';
+            $fields['subject'] = null;
         }
 
         if(isset($vars['description_text'])) {
             $fields['description_text'] = $vars['description_text'];
         } else {
-            $fields['description_text'] = '';
+            $fields['description_text'] = null;
         }
         
         return $fields;
@@ -126,10 +126,26 @@ class ItemsServices
         ];
     }
 
-    private function store()
+    private function store($fields)
     {
-        return $response = [
+        $StudentsModel = new StudentsModel;
+        $id = $fields['id'];
 
+        if($id > 0) {
+            $edit = $StudentsModel::where('id', $id)->update($fields); 
+            $mode = 'Редактиран';
+        } else {
+            unset($fields['id']);
+            $saved = $StudentsModel::create($fields);
+            
+            $id = $saved->id;
+            $mode = 'Регистриран';
+        }
+
+        return $response = [
+            'status' => 1,
+            'id' => $id,
+            'message' => "Успешно $mode студент с ID - $id",
         ];
     }
 
@@ -200,7 +216,7 @@ class ItemsServices
     {
         $StudentsModel = new StudentsModel;
 
-        $student = $StudentsModel::find($id);
+        $student = $StudentsModel::findOrFail($id);
 
         return $student;
     }
