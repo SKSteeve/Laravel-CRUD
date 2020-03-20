@@ -20,17 +20,57 @@ class ItemsServices
 
     public function save()
     {
-
+        $fields = $this->setValues($this->vars);
+        
     }
 
-    private function setValues($fields)
+    private function setValues($vars = [])
     {
-        //if subject isset && subject > 0 -> fields['subj'] = subj
+        if(isset($vars['id'])) {
+            $fields['id'] = $vars['id'];
+        }
 
-        // TODO ->
-        // $arrDB = implode(',', $searchParams['sport_preff']);
-        //echo $arrDB;
-        //var_dump($searchParams['sport_preff']);
+        if(isset($vars['name'])) {
+            $fields['name'] = $vars['name'];
+        }
+
+        if(isset($vars['last_name'])) {
+            $fields['last_name'] = $vars['last_name'];
+        }
+
+        if(isset($vars['egn'])) {
+            $fields['egn'] = $vars['egn'];
+        }
+
+        if(isset($vars['email'])) {
+            $fields['email'] = $vars['email'];
+        }
+
+        if(isset($vars['city'])) {
+            $fields['city'] = $vars['city'];
+        }
+
+        if(isset($vars['gender'])) {
+            $fields['gender'] = $vars['gender'];
+        }
+        
+        if(isset($vars['sport_preff'])) {
+            if(is_array($vars['sport_preff'])) {
+                $string = implode(',', $vars['sport_preff']);
+                $fields['sport_preff'] = $string;
+            } else {
+                $fields['sport_preff'] = $vars['sport_preff'];
+            }
+        }
+
+        if(isset($vars['subject']) && $vars['subject'] > 0) {
+            $fields['subject'] = $vars['subject'];
+        }
+
+        if(isset($vars['description_text'])) {
+            $fields['description_text'] = $vars['description_text'];
+        }
+        
         return $fields;
     }
 
