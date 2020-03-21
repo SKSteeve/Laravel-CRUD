@@ -86,4 +86,17 @@ class ItemsController extends Controller
 
         return abort(404);
     }
+
+    /**************************************************************************************************** */
+
+    function restore($id)
+    {
+        $ItemsServices = new ItemsServices;
+
+        $restoreResponse = $ItemsServices->getDetails($id);
+
+        $message =  $restoreResponse['restore_msg'];
+        $messageStatus = 'success';
+        return redirect('items')->with(['message' => $message, 'messageStatus' => $messageStatus]);
+    }
 }
