@@ -227,5 +227,13 @@ class ItemsServices
 
         $forceDelete = $StudentsModel->where('id', $id)->whereNotNull('deleted_at')->forceDelete();
         $softDelete = $StudentsModel->where('id', $id)->whereNull('deleted_at')->delete();
+        
+        if(!empty($forceDelete)) {
+            $hardOrSoft = 'hard';
+        } else {            
+            $hardOrSoft = 'soft';
+        }
+
+        return $response = [ 'hardOrSoft' => $hardOrSoft];
     }
 }
