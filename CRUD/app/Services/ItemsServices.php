@@ -216,14 +216,16 @@ class ItemsServices
     {
         $StudentsModel = new StudentsModel;
 
-        $student = $StudentsModel::find($id);
-
-        if(!$student) {
-            $student = $StudentsModel::withTrashed()->find($id)->restore();
-            return $response = ['restore_msg' => "Успешно възстановен студент с ID - $id"];
-        }
-
+        $student = $StudentsModel::findOrFail($id);
         return $student;
+    }
+
+    public function restore($id)
+    {
+        $StudentsModel = new StudentsModel;
+
+        $student = $StudentsModel::withTrashed()->find($id)->restore();
+        return $response = ['restore_msg' => "Успешно възстановен студент с ID - $id"];
     }
 
     public function delete($id)
