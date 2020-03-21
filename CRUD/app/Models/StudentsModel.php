@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class StudentsModel extends Model
 {
     protected $table = 'students';
-    protected $fillable = ['name', 'last_name', 'egn', 'email', 'city', 'gender', 'sport_preff', 'subject', 'description_text'];
+    protected $guarded = ['id'];
     use SoftDeletes;
 
     public static function rules($id = 0) {
