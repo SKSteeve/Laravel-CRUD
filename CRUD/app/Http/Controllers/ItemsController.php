@@ -78,7 +78,8 @@ class ItemsController extends Controller
         if($id > 0) {
             $delete = $ItemsServices->delete($id);
             
-            $message = "Успешно изтрит студент с ID - $id";
+            $hardOrSoft= $delete['hardOrSoft'];
+            $message = "Успешно изтрит($hardOrSoft) студент с ID - $id";
             $messageStatus = "success";
             return redirect('items')->with(['message' => $message, 'messageStatus' => $messageStatus]);
         }
