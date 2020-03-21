@@ -21,4 +21,6 @@ Route::any('items', 'ItemsController@Items');
 Route::any('item/{id?}', 'ItemsController@Item');
 
 Route::any('delete/{id}', 'ItemsController@delete');
+Route::any('restore/{id}', 'ItemsController@restore');
+
 
