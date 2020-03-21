@@ -132,7 +132,12 @@
           <th>@if($student['subject'] == 1) {{$subject[1]}} @elseif($student['subject'] == 2) {{$subject[2]}} @elseif($student['subject'] == 3) {{$subject[3]}} @elseif($student['subject'] == 4) {{$subject[4]}}@endif</th>
           <th>{{$student['description_text']}}</th>
 
-          <th><a href="{{url('item', $student['id'])}}" class="btn btn-primary">Редактирай</a></th>
+          @if(isset($student['deleted_at']))
+            <th><a href="{{url('restore', $student['id'])}}" class="btn btn-secondary">Възстанови</a></th>
+          @else
+            <th><a href="{{url('item', $student['id'])}}" class="btn btn-primary">Редактирай</a></th>
+          @endif
+
           <th><a href="{{url('delete', $student['id'])}}" class="btn btn-danger">@if(isset($student['deleted_at'])) <i class="fas fa-trash-alt"></i> @else Изтрий @endif</a></th>
         </tr>
       @endforeach
