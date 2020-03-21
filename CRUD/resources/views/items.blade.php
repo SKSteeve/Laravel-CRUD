@@ -98,7 +98,7 @@
     <div class="alert alert-{{session()->get('messageStatus')}}" role="alert">{{session()->get('message')}}</div><br />
   @endif
 
-  <table class="table table-hover">
+  <table class="table table-hover table-sm table-bordered">
     <thead>
       <tr>
         <th>#</th>
