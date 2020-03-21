@@ -93,7 +93,7 @@ class ItemsController extends Controller
     {
         $ItemsServices = new ItemsServices;
 
-        $restoreResponse = $ItemsServices->getDetails($id);
+        $restoreResponse = $ItemsServices->restore($id);
 
         $message =  $restoreResponse['restore_msg'];
         $messageStatus = 'success';
