@@ -22,15 +22,15 @@ This is a simple CRUD project with Laravel
    * you can use **phpMyAdmin**, **HeidiSQL** or other tool
    * use **utf8_general_ci**
 ### 4. Open CRUD/.env file and fill:
-   * DB_CONNECTION=mysql
-   * DB_HOST=127.0.0.1
-   * DB_DATABASE=<the name of the database you created>
-   * DB_USERNAME=<your username>
-   * DB_PASSWORD=<your password>
+   * **DB_CONNECTION**=mysql
+   * **DB_HOST**=127.0.0.1
+   * **DB_DATABASE**=< the name of the database you created >
+   * **DB_USERNAME**=< your username >
+   * **DB_PASSWORD**=< your password >
 ### 5. To migrate the database execute:
    * **php artisan migrate**
 ### 6. To seed the database execute:
    * **php artisan db:seed**
 ### 7. Now type in the browser the url:
-   * **localhost/<the folder you created at step 1>/Laravel-CRUD/CRUD/public/items**
+   * **localhost/**< the folder you created at step 1 >**/Laravel-CRUD/CRUD/public/items**
         
