@@ -6,19 +6,37 @@ use Illuminate\Support\Facades\Validator;
 
 class ItemsServices
 {
-
+    /**
+     * @var array
+     */
     private $vars;
 
+    /**
+     * @param array $vars
+     * 
+     * @return void
+     */
     public function __construct($vars = [])
     {
         $this->setVars($vars);
     }
 
+    /**
+     * @param array $vars
+     * 
+     * @return void
+     */
     private function setVars($vars = [])
     {
         $this->vars = $vars;
     }
 
+    /**
+     *  Call setValues(), give the seted values to validate() and if validate() pass
+     *    we call the store() to save and return the response. If validate() fail - return validate errors. 
+     * 
+     * @return array $validateResponse or $storeResponse
+     */
     public function save()
     {
         $fields = $this->setValues($this->vars);
@@ -32,6 +50,13 @@ class ItemsServices
         return $validateResponse;
     }
 
+    /**
+     *  Set the values in array, clean and prepared for save in the store().
+     * 
+     * @param array $vars
+     * 
+     * @return array $fields
+     */
     private function setValues($vars = [])
     {
         if(isset($vars['id']) && $vars['id'] > 0) {
@@ -102,6 +127,13 @@ class ItemsServices
         return $fields;
     }
 
+    /**
+     *  Validate the prepared fields for saving, returning status if passed or not and errors.
+     * 
+     * @param array $fields
+     * 
+     * @return array $response
+     */
     private function validate($fields)
     {
         $StudentsModel = new StudentsModel;
@@ -126,6 +158,13 @@ class ItemsServices
         ];
     }
 
+    /**
+     *  Save or update in the db and return the saved/updated model ID and message.
+     * 
+     * @param array $fields
+     * 
+     * @return array $response
+     */
     private function store($fields)
     {
         $StudentsModel = new StudentsModel;
@@ -149,6 +188,13 @@ class ItemsServices
         ];
     }
 
+    /**
+     *  Check the filters submited and return the records from the database that have passed the filters.
+     * 
+     * @param array $searchParams
+     *  
+     * @return object $StudentsModel
+     */
     public function getRecords($searchParams = [])
     {
         $StudentsModel = new StudentsModel;
@@ -212,6 +258,13 @@ class ItemsServices
         return $StudentsModel->get();
     }
 
+    /**
+     *  Find a model in the db and returns it or return 404.
+     * 
+     * @param integer $id
+     * 
+     * @return object $student
+     */
     public function getDetails($id)
     {
         $StudentsModel = new StudentsModel;
@@ -220,6 +273,13 @@ class ItemsServices
         return $student;
     }
 
+    /**
+     *  Restore a model that is soft deleted. Return message with the restored $id.
+     * 
+     * @param integer $id
+     * 
+     * @return array $response
+     */
     public function restore($id)
     {
         $StudentsModel = new StudentsModel;
@@ -228,6 +288,13 @@ class ItemsServices
         return $response = ['restore_msg' => "Успешно възстановен студент с ID - $id"];
     }
 
+    /**
+     *  Delete model soft / hard. Return message hard / soft.
+     * 
+     * @param integer $id
+     * 
+     * @return array $response
+     */
     public function delete($id)
     {
         $StudentsModel = new StudentsModel;
