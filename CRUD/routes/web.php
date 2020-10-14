@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('items', 'ItemsController@Items');
-Route::any('item/{id?}', 'ItemsController@Item');
+Route::get('items', 'ItemsController@ItemsView');
+Route::post('items', 'ItemsController@ItemsAjaxSearch');
 
 Route::any('delete/{id}', 'ItemsController@delete');
 Route::any('restore/{id}', 'ItemsController@restore');
 
-
+Route::any('item/{id?}', 'ItemsController@Item');
