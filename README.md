@@ -1,7 +1,7 @@
 # Laravel-CRUD
 
 This is CRUD project with Laravel using:
-   **jQuery**,**AJAX**,**PHP**,**MySQL****...**
+   **jQuery**,**AJAX**,**PHP**,**MySQL** **...**
 
 
 #
