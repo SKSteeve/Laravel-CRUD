@@ -1,6 +1,9 @@
 # Laravel-CRUD
 
-This is a simple CRUD project with Laravel
+This is CRUD project with Laravel using:
+   **jQuery**,**AJAX**,**PHP**,**MySQL****...**
+
+
 #
 ## **Download and setup on your computer**
 
