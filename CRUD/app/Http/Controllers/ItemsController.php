@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\ItemsServices;
 
 class ItemsController extends Controller
-{
-    
+{    
     public function Item(Request $request, $id = 0)
     {
         $studentData = $request->input('formdata');
@@ -47,32 +46,28 @@ class ItemsController extends Controller
         return view('item', $variables);
     }
 
-/********************************************************************************************************** */
+    /********************************************************************************************************** */
 
-    public function Items(Request $request, $id = 0)
+    public function ItemsView() {
+        return view('items');
+    }
+
+    /****************************** */
+
+    public function ItemsAjaxSearch(Request $request, $id = 0)
     {
         $params = $request->input('formdata');
-
         $ItemsServices = new ItemsServices;
-
         $students = $ItemsServices->getRecords($params);
 
-        $variables = [
-
-            'student' => $params,
-            'students' => $students,
-
-            'subject' => [0 => '-', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология', 4 => 'Биоинженерство'],
-            'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
-        ];
-
-        return view('items', $variables);
+        return response()->json(['success'=>'Ajax request submitted successfully', 'students' => $students, 'params' => $params]);
     }
 
     /***************************************************************************************************** */
 
-    function delete($id)
-    {
+    public function delete(Request $request) {
+        $id = $request->input('id');
+
         $ItemsServices = new ItemsServices;
 
         if($id > 0) {
@@ -81,15 +76,14 @@ class ItemsController extends Controller
             $hardOrSoft= $delete['hardOrSoft'];
             $message = "Успешно изтрит($hardOrSoft) студент с ID - $id";
             $messageStatus = "success";
-            return redirect('items')->with(['message' => $message, 'messageStatus' => $messageStatus]);
-        }
-
+            return response()->json(['success'=>'Ajax request submitted successfully','message' => $message, 'messageStatus' => $messageStatus, 'hardOrSoft' => $hardOrSoft]);
+        }        
         return abort(404);
     }
 
     /**************************************************************************************************** */
 
-    function restore($id)
+    public function restore($id)
     {
         $ItemsServices = new ItemsServices;
 
