@@ -146,7 +146,7 @@ class ItemsServices
 
         if($validator->fails()) {
             $status = -1;
-            $errors = $validator->errors();
+            $errors = $validator->errors()->all();
         } else {
             $status = 1;
             $errors = [];
