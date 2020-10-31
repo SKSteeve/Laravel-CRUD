@@ -5,7 +5,6 @@
 @section('form')
 <div class="mx-auto" style="width: 900px;">
   <form method="POST">
-    @csrf
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="ID">ID</label>
@@ -72,18 +71,20 @@
       
       <div class="form-row">
         <div class="form-group col">
-            <a class="btn btn-primary" href="{{url('/item')}}">Изчисти</a>
+        <a class="btn btn-primary" href="{{url('/item')}}" id="clear" >Изчисти</a>
             <a class="btn btn-danger" href="{{url('/items')}}">Отказ</a>
-            <button class="btn btn-primary" type="submit" name="save" value="save">Запиши</button>
+            <button class="btn btn-primary" type="submit" id="save" name="save" value="save">Запиши</button>
         </div>
     </div>
-
+    <input type="hidden" value="{{url('/')}}" id="url" name="url">
   </form>
 
-  @if($message != '')
-    <div class="alert alert-success" role="alert">{{$message}}</div>
-  @elseif(!empty($errors))
-    <div class="alert alert-danger" role="alert">Невалидни данни! @foreach(@$errors->all() as $error) {{$error}} @endforeach</div>
-  @endif
+  {{-- ajaxValidation messages here --}}
+  <div class="ajax-message-validations"></div>
+  
 </div>
+@endsection
+
+@section('js')
+<script src="{{ asset('js/itemAjax.js') }}"></script>
 @endsection
