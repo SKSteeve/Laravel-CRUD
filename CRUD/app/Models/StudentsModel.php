@@ -14,7 +14,7 @@ class StudentsModel extends Model
             'name' => 'required|alpha|min:3',
             'last_name' => 'required|alpha|min:3',
             'egn' => 'required|digits:10|unique:students,egn,' . $id,
-            'email' => 'required|unique:students,email,' . $id,
+            'email' => 'required|email|unique:students,email,' . $id,
             'city' => 'required|alpha|min:3|max:15',
             'gender' => 'required',
         ];
@@ -35,6 +35,7 @@ class StudentsModel extends Model
 
         'email.required' => 'Имейла е задължителен!',
         'email.unique' => 'Вече има друг потребител с този Имейл!',
+        'email.email' => 'Невалиден Имейл!',
 
         'city.required' => 'Града е задължителен!',
         'city.alpha' => 'Града трябва да съдържа само букви!',
