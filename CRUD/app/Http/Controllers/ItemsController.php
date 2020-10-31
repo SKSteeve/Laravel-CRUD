@@ -7,37 +7,17 @@ use App\Services\ItemsServices;
 
 class ItemsController extends Controller
 {    
-    public function Item(Request $request, $id = 0)
+    public function ItemView($id = 0)
     {
-        $studentData = $request->input('formdata');
-
-        $ItemsServices = new ItemsServices($studentData);
+        $studentData = [];
 
         if($id > 0) {                       // edit student
+            $ItemsServices = new ItemsServices();
             $studentData = $ItemsServices->getDetails($id);
         }
 
-        $save = $request->input('save');
-        $message = '';
-        $errors = [];
-        if(isset($save)) {
-            $save = $ItemsServices->save();
-
-            if($save['status'] > 0) {
-                $message = $save['message'];
-                $studentData = $request->input('formdata');
-                $studentData['id'] = $save['id'];
-            } else {
-                $errors = $save['errors'];
-            }
-        }
-
         $variables = [
-
             'student' => $studentData,
-
-            'message' => $message,
-            'errors' => $errors,
 
             'subject' => [0 => '-', 1 => 'Биоинформатика', 2 => 'Биохимия', 3 => 'Екология', 4 => 'Биоинженерство'],
             'searchGroup' => [0 => 'Покажи Всички', 1 => 'Неизтрити', 2 => 'Изтрити'],
@@ -45,6 +25,32 @@ class ItemsController extends Controller
 
         return view('item', $variables);
     }
+
+    /*********************************** */
+
+    public function ItemAjaxValidation(Request $request) {
+        
+        $studentData = $request->input('formdata');
+
+        $ItemsServices = new ItemsServices($studentData);
+        
+        $message = '';
+        $errors = [];
+        
+        $save = $ItemsServices->save();
+
+        if($save['status'] > 0) {
+            $message = $save['message'];
+            $studentData = $request->input('formdata');
+            $studentData['id'] = $save['id'];
+        } else {
+            $errors = $save['errors'];
+        }
+
+        return response()->json(['success'=>'Ajax request submitted successfully', 'studentData' => $studentData,
+        'errors' => $errors, 'message' => $message]);
+    }
+
 
     /********************************************************************************************************** */
 
