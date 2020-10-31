@@ -23,4 +23,5 @@ Route::post('items', 'ItemsController@ItemsAjaxSearch');
 Route::any('delete/{id}', 'ItemsController@delete');
 Route::any('restore/{id}', 'ItemsController@restore');
 
-Route::any('item/{id?}', 'ItemsController@Item');
+Route::get('item/{id?}', 'ItemsController@ItemView');
+Route::post('itemValidation', 'ItemsController@ItemAjaxValidation');
