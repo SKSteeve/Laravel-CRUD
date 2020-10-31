@@ -12,7 +12,7 @@ $(document).ready( function () {
         });
       
         $.ajax({
-          url: "items",
+          url: `${base_path}/items`,
           type: "POST",
           data: $('form').serialize(),
           success: searchResponse,
@@ -115,7 +115,7 @@ $(document).ready( function () {
           });
         
           $.ajax({
-            url: `delete/${id}`,
+            url: `${base_path}/delete/${id}`,
             type: "POST",
             data: {
                 id: id,
